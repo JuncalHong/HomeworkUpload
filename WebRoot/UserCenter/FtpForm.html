@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>访问FTP站点</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<link rel="stylesheet" type="text/css" href="plug-ins/jquery-easyui-1.4.3/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="plug-ins/jquery-easyui-1.4.3/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="plug-ins/jquery-easyui-1.4.3/themes/color.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="plug-ins/jquery-easyui-1.4.3/jquery.easyui.min.js"></script>
+    <script type="text/javascript"  src="plug-ins/jquery-easyui-1.4.3/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+      function submitForm(){
+             $.messager.confirm('确认登陆','确定登陆该FTP服务器吗.',function(r){
+             if (r){
+              $('#ftpForm').form('submit',{
+                url: 'Ftp_Login.action',
+                onSubmit: function(){
+                    return $(this).form('validate');
+                    
+                },
+                success: function(result){
+                    var result = eval('('+result+')');
+                    if (result.errorMsg){
+                        $.messager.alert({
+                            title: '错误',
+                            msg: '访问FTP服务器失败，请检查。\n原因可能是：1、FTP服务器地址错误；2、FTP服务器拒绝连接；3、用户名或者密码错误；'
+                        }); 
+                    }
+                  else
+                     window.location.href="FtpSiteFileList.jsp?ftpUrl="+$("#server").val()+":"+$("#port").val()+"&path=/&parentPath=/";
+                }
+            });    
+            }
+            });
+            }
+           function clearForm(){
+                $('#ftpForm').form('clear');
+            }
+    </script>
+  </head>
+  
+  <body>
+     <div class="easyui-panel" title="打开FTP服务器" style="width:auto" >
+        <div style="padding:10px 60px 20px 60px">
+        <form id="ftpForm" method="post" >
+            <table cellpadding="5" style="margin:0 auto;">
+              <tr>
+               <td style="color:red">注意:</td>
+               <td style="color:red">当您使用本系统进行对FTP进行访问(包括文件的上传和下载以及其他操作)时，<br>即表示您已经知道本系统连接到的是第三方的域名,<br>使用本系统不能很好的保证数据传输的中所产生的可能的所有安全性问题，<br>如果您传输的是机密数据，建议您采用其他方式进行传输.<br>当您使用本系统时，所产生的任何问题由您（使用方本人）自行承担。</td>
+              </tr>
+                <tr>
+                    <td>IP地址:</td>
+                    <td><input class="easyui-validatebox easyui-textbox"  type="text" id="server" name="server" data-options="required:true,validType:'length[1,20]',missingMessage:'请输入FTP服务器的IP地址'" value="10.132.254.1"></input></td>
+                </tr>
+                <tr>
+                    <td>端口:</td>
+                    <td><input class="easyui-validatebox easyui-textbox" type="text" id="port" name="port" data-options="required:true,validType:'length[1,5]',missingMessage:'请输入端口'"></input></td>
+                </tr>
+                <tr>
+                    <td>用户名:</td>
+                    <td><input class="easyui-validatebox easyui-textbox" type="text" id="username" name="username" data-options="required:true,validType:'length[1,20]',missingMessage:'用户名不正确'" value="anonymous"></input></td>
+                </tr>
+                <tr>
+                    <td>密码:</td>
+                    <td><input class="easyui-validatebox easyui-textbox" type="password" name="password"></input></td>
+                </tr> 
+                </table>
+            </form>
+            <div style="text-align:center;padding:5px">
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">登陆</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">清空</a>
+            </div>
+            </div>
+        </div>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+body{
+	min-width: 1080px;
+}
+div.body{
+	margin:10px auto;
+}
+.menu_list{
+	float:left;
+	width:185px;
+	}
+.menu_head{
+	width:185px;
+	height:47px;
+	line-height:47px;
+	padding-left:38px;
+	font-size:14px;
+	color:#525252;
+	cursor:pointer;
+	border:1px solid #e1e1e1;
+	position:relative;
+	font-weight:bold;
+	background:#f1f1f1 url(../images/pro_left.png) center right no-repeat;
+	margin:0;
+	font-size:20px;
+	}
+.menu_list .current{
+	background:#f1f1f1 url(../images/pro_down.png) center right no-repeat;
+	}
+.menu_body{
+	width:223px;
+	height:auto;
+	overflow:hidden;
+	line-height:38px;
+	border-left:1px solid #e1e1e1;
+	backguound:#fff;
+	border-right:1px solid #e1e1e1;
+	}
+.menu_body a{
+	display:block;
+	width:223px;
+	height:38px;
+	line-height:38px;
+	padding-left:38px;
+	color:#777777;
+	background:#fff;
+	text-decoration:none;
+	border-bottom:1px solid #e1e1e1;
+	}
+.menu_body a:hover{
+	text-decoration:none;
+	}
+iframe.iframe{
+	width:auto;
+	min-width:830px;
+	height:auto;
+	
+
+}
+div¡£head{
+	height:10px;
+	background-color:yellow;
+	color:blue;
+	line-height:10px;
+	
+}
+div.position{
+
+}
+div.content{
+	width:auto;
+	margin-left:250px;
+	margin-top:0px;
+	min-hright:800px;
+}

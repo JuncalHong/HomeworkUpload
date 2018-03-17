@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.action.extension" value="action, asp"></constant>
+	<constant name="struts.multipart.saveDir" value="/tmp"></constant>
+	<constant name="struts.multipart.maxSize" value="2048000000"></constant>
+	 <package name="action" extends="struts-default">
+	  <interceptors>
+	    <interceptor name="IsLogin" class="interceptor.IsLoginInterceptor" />
+	    <interceptor-stack name="IsLoginStack">
+	     <interceptor-ref name="defaultStack" />
+	     <interceptor-ref name="IsLogin" />
+	    </interceptor-stack>
+	    </interceptors>
+	    <default-interceptor-ref name="IsLoginStack"></default-interceptor-ref>
+	    <global-results>
+	        <result name="unlogin" type="redirect">/index.jsp</result>
+	    </global-results>
+	     <action name="Ftp_*" class="action.FtpServerAction" method="Ftp{1}">      
+            <result name="success">/Tips?tipInforCmd=FtpConnectSuccess</result>
+            <result name="failed">/Tips?tipInforCmd=FtpConnectError</result>
+         </action>
+         <action name="File_Upload" class="action.FileAction" method="FileUpload">      
+            <result name="success">/Tips?tipInforCmd=FtpConnectSuccess</result>
+            <result name="failed">/Tips?tipInforCmd=FtpConnectError </result>
+         </action>
+          <action name="File_DownloadClear" class="action.FileAction" method="FileDownloadClear">      
+            <result name="success">/Tips?tipInforCmd=FtpConnectSuccess</result>
+            <result name="failed">/Tips?tipInforCmd=FtpConnectError </result>
+         </action>
+          <action name="File_Download" class="action.FileAction" method="FileDownload">      
+             <result name="success" type="stream">
+                <param name="contentDisposition">attachment; filename="${filename}"</param> 
+                <param name="inputName">fileInput</param> 
+                <param name="contentType">application/octet-stream</param>  
+                <param name="bufferSize">4096</param>
+                <param name="charSet">UTF-8</param>
+            </result>
+            <result name="failed">/Tips?tipInforCmd=FtpConnectError </result>
+         </action>
+          <action name="Computer_*" class="action.ComputerAction" method="Computer{1}">      
+            <result name="success">/Tips?tipInforCmd=FtpConnectSuccess</result>
+            <result name="failed">/Tips?tipInforCmd=FtpConnectError </result>
+         </action>
+         <action name="Users_*" class="action.UserAction" method="User{1}">      
+            <result name="success">/Tips?tipInforCmd=FtpConnectSuccess</result>
+            <result name="failed">/Tips?tipInforCmd=FtpConnectError</result>
+         </action>
+         <!-- <action name="FileDownloadFromFtp" class="action.FileAction" method="FileDownload">      
+             <result name="success">/Tips?tipInforCmd=FtpConnectSuccess</result>
+             <result name="failed">/Tips?tipInforCmd=FtpConnectError </result>
+         </action>
+          <action name="FileDownloadFromDownload" class="action.FileAction" method="FileDownload">      
+             <result name="success">/Tips?tipInforCmd=FtpConnectSuccess</result>
+             <result name="failed">/Tips?tipInforCmd=FtpConnectError </result>
+         </action>-->
+     </package> 
+     <package name="Login" extends="struts-default">
+      <action name="User_*" class="action.UserLoginAction" method="User{1}">         
+              <result name="success" type="redirect">/UserCenter/Main.jsp</result>
+              <result name="failed" type="redirect">/index.jsp</result>
+              <result name="AuthPass">/Tips?tipInforCmd=FtpConnectSuccess</result>
+              <result name="AuthFailed">/Tips?tipInforCmd=FtpConnectError</result>
+         </action>
+    </package>
+</struts>    
