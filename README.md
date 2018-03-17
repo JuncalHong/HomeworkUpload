@@ -1,0 +1,2 @@
+# HomeworkUpload
+一个基于Struts框架开发的通过WEB访问内网FTP服务器的作业提交平台。
